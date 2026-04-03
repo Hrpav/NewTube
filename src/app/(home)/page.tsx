@@ -10,7 +10,7 @@ export default async function Home() {
   // i think there are more than one but i used this one...
   //  const data = await trpc.hello({ text: "Hrpavi" }); // SERVER COMPONENT FETCHING FROM THE DATA
                                                          // WITHOUT "use client";
-  void trpc.hello.prefetch({ text: "Hrpavi" });
+  await trpc.hello.prefetch({ text: "Hrpavi" });
 
   return (
     <div>

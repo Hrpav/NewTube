@@ -1,1 +1,0 @@
-I STOPPED AT 2:45:19 IN THE VIDEO (https://www.youtube.com/watch?v=ArmPzvHTcfQ&list=PLMwCFr4NqgMpENaeA_uuXsu0xrYSVnzlA)

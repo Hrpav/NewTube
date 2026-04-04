@@ -10,7 +10,7 @@ This project is **not finished yet** and is still under active development. Expe
 
 ### Prerequisites
 
-- Node.js (recommended) or Bun
+- Bun (recommeneded) or Node.js
 
 ### Install dependencies
 

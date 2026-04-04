@@ -5,9 +5,6 @@ import { Sidebar, SidebarContent } from "@/components/ui/sidebar";
 import { MainSection } from "./main-section";
 import { PersonalSection } from "./personal-section";
 
-// <PersonalSection /> src/modules/home/ui/components/home-sidebar/personal-section.tsx
-// <MainSection /> src/modules/home/ui/components/home-sidebar/main-section.tsx
-
 export const HomeSidebar = () => {
     return (
         <Sidebar className="pt-16 z-40 border-none" collapsible="icon"> 

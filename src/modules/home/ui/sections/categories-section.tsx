@@ -3,6 +3,7 @@
 import { trpc } from "@/trpc/client";
 import { ErrorBoundary } from "react-error-boundary";
 import { Suspense } from "react";
+import { FilterCarousel } from "@/components/filter-carousel";
 
 interface CategoriesSectionProps {
     categoryId?: string;
@@ -10,7 +11,7 @@ interface CategoriesSectionProps {
 
 export const CategoriesSection = ({ categoryId }: CategoriesSectionProps) => {
     return (
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<FilterCarousel isLoading value={categoryId} data={[]} />}>
             <ErrorBoundary fallback={<p>Error...</p>}>
                 <CategoriesSectionSuspense categoryId={categoryId}/>
             </ErrorBoundary>
@@ -21,9 +22,12 @@ export const CategoriesSection = ({ categoryId }: CategoriesSectionProps) => {
 const CategoriesSectionSuspense = ({ categoryId }: CategoriesSectionProps) => {
     const [categories] = trpc.categories.getMany.useSuspenseQuery();
 
-    return (
-        <div>
-            {JSON.stringify(categories)}
-        </div>
-    );
+    const data = categories.map(({ name, id }) => ({
+        value: id,
+        label: name,
+    }));
+
+    // console.log({ data })
+
+    return <FilterCarousel onSelect={(x) => console.log(x)} value={categoryId} data={data}/>
 };

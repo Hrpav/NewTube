@@ -64,13 +64,16 @@ export const FilterCarousel = ({
       >
         <CarouselContent className="-ml-3">
           {!isLoading && (
-            <CarouselItem 
-            onClick={() => onSelect(null)} // wtf?
-            className="pl-3 basis-auto">
+            <CarouselItem className="pl-3 basis-auto">
               <Badge
                 variant={!value ? "default" : "secondary"}
-                className="bg-slate-100 rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm hover:bg-slate-200"
-                onClick={() => onSelect?.(null)}
+                className={cn(
+                  "rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm",
+                  !value
+                    ? "bg-black text-white hover:bg-black/90"
+                    : "bg-slate-100 text-slate-900 hover:bg-slate-200",
+                )}
+                onClick={() => onSelect(null)}
               >
                 All
               </Badge>
@@ -84,15 +87,16 @@ export const FilterCarousel = ({
             ))}
           {!isLoading &&
             data.map((item) => (
-              <CarouselItem 
-              key={item.value} 
-              className="pl-3 basis-auto" 
-              onClick={() => onSelect(item.value)}
-              >
+              <CarouselItem key={item.value} className="pl-3 basis-auto">
                 <Badge
                   variant={value === item.value ? "default" : "secondary"}
-                  className="bg-slate-100 rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm hover:bg-slate-200"
-                  onClick={() => onSelect?.(item.value)}
+                  className={cn(
+                    "rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm",
+                    value === item.value
+                      ? "bg-black text-white hover:bg-black/90"
+                      : "bg-slate-100 text-slate-900 hover:bg-slate-200",
+                  )}
+                  onClick={() => onSelect(item.value)}
                 >
                   {item.label}
                 </Badge>

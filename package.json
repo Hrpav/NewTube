@@ -63,6 +63,7 @@
     "react-error-boundary": "5.0.0",
     "react-hook-form": "^7.72.0",
     "server-only": "^0.0.1",
+    "sonner": "^2.0.7",
     "superjson": "2.2.2",
     "svix": "1.45.1",
     "tailwind-merge": "^3.5.0",

@@ -1,6 +1,6 @@
 # NewTube
 
-A work-in-progress video platform built with Next.js.
+A YouTube clone made with Next.js, Bun, React, tRPC, drizzle, tailwind, shadcn, eslint, and more.
 
 ## Status
 
@@ -10,7 +10,7 @@ This project is **not finished yet** and is still under active development. Expe
 
 ### Prerequisites
 
-- Bun (recommeneded) or Node.js
+- [Bun](https://bun.com/) (recommeneded) or [Node.js](https://nodejs.org/en)
 
 ### Install dependencies
 
@@ -31,7 +31,7 @@ bun run dev
 ## Scripts
 
 - `dev` - start Next.js in development mode
-- `dev:all` - run the app + webhook tunnel (requires `ngrok`)
+- `dev:all` - run the app + webhook tunnel (requires [ngrok](https://ngrok.com/))
 - `build` - production build
 - `start` - run the production server
 - `lint` - run linting

@@ -1,20 +1,26 @@
 "use client";
 
-import { toast } from "sonner";
 import { Loader2Icon, PlusIcon } from "lucide-react"
 
 import { trpc } from "@/trpc/client";
 import { Button } from "@/components/ui/button"
+import { toast } from "@/hooks/use-toast";
 
 export const StudioUploadModal = () => {
   const utils = trpc.useUtils();
   const create = trpc.videos.create.useMutation({
     onSuccess: () => {
-      toast.success("Video created");
+      toast({
+        title: "Video created",
+      });
       utils.studio.getMany.invalidate();
     },
-    onError: () => {
-      toast.error("Something went wrong");
+    onError: (error) => {
+      toast({
+        title: "Something went wrong",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 

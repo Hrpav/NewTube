@@ -3,6 +3,7 @@
 import { trpc } from "@/trpc/client";
 import { DEFAULT_LIMIT } from "@/constants";
 import { Suspense } from "react";
+import { format } from "date-fns";
 import { ErrorBoundary } from "react-error-boundary";
 import { InfiniteScroll } from "@/components/infinite-scroll";
 import { VideoThumbnail } from "@/modules/videos/ui/components/video-thumbnail";
@@ -16,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { snakeCaseToTitle } from "@/lib/utils";
 
 export const VideosSection = () => {
   return (
@@ -86,16 +88,26 @@ const VideosSectionSuspense = () => {
                            duration={video.duration || 0}
                           />
                         </div>
+                        <div className="min-w-0 flex flex-col overflow-hidden gap-y-1">
+                          <span className="text-sm font-medium text-zinc-900 line-clamp-1">
+                            {video.title}
+                          </span>
+                          <span className="text-xs text-muted-foreground line-clamp-1">
+                            {video.description || "No description"}
+                          </span>
+                        </div>
                       </div>
                       </TableCell>
                     <TableCell className="py-4">
                       visibility
                       </TableCell>
                     <TableCell className="py-4">
-                      status
+                        <div className="flex items-center">
+                          {snakeCaseToTitle(video.muxStatus || "Error")}
+                        </div>
                       </TableCell>
-                    <TableCell className="py-4">
-                      date
+                    <TableCell className="py-4 text-sm truncate">
+                      {format(new Date(video.createdAt), "d MMM yyyy")}
                       </TableCell>
                     <TableCell className="py-4 text-right">
                       views

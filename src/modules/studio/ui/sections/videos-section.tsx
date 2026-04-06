@@ -5,6 +5,7 @@ import { DEFAULT_LIMIT } from "@/constants";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { InfiniteScroll } from "@/components/infinite-scroll";
+import { VideoThumbnail } from "@/modules/videos/ui/components/video-thumbnail";
 import Link from "next/link";
 
 import {
@@ -76,7 +77,11 @@ const VideosSectionSuspense = () => {
                 >
                   <TableRow className="cursor-pointer group border-b border-zinc-100 last:border-0 hover:bg-zinc-50 transition-colors">
                     <TableCell className="pl-6 py-4">
-                      {video.title}
+                      <div className="flex items-center gap-4">
+                        <div className="relative aspect-video w-36 shrink-0">
+                          <VideoThumbnail imageUrl={video.thumbnailUrl} />
+                        </div>
+                      </div>
                       </TableCell>
                     <TableCell className="py-4">
                       visibility

@@ -23,11 +23,80 @@ import {
 
 export const VideosSection = () => {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<VideosSectionSkeleton />}>
       <ErrorBoundary fallback={<p>Error</p>}>
         <VideosSectionSuspense />
       </ErrorBoundary>
     </Suspense>
+  );
+};
+
+const VideosSectionSkeleton = () => {
+  return (
+    <div>
+      <div className="rounded-md border border-zinc-200 bg-white shadow-sm">
+        <Table>
+          <TableHeader>
+            <TableRow className="hover:bg-transparent border-b border-zinc-100">
+              <TableHead className="h-12 pl-6 w-[510px] text-zinc-500 font-semibold text-xs uppercase tracking-wider">
+                Video
+              </TableHead>
+              <TableHead className="h-12 text-zinc-500 font-semibold text-xs uppercase tracking-wider">
+                Visibility
+              </TableHead>
+              <TableHead className="h-12 text-zinc-500 font-semibold text-xs uppercase tracking-wider">
+                Status
+              </TableHead>
+              <TableHead className="h-12 text-zinc-500 font-semibold text-xs uppercase tracking-wider">
+                Date
+              </TableHead>
+              <TableHead className="h-12 text-right text-zinc-500 font-semibold text-xs uppercase tracking-wider">
+                Views
+              </TableHead>
+              <TableHead className="h-12 text-right text-zinc-500 font-semibold text-xs uppercase tracking-wider">
+                Comments
+              </TableHead>
+              <TableHead className="h-12 text-right pr-6 text-zinc-500 font-semibold text-xs uppercase tracking-wider">
+                Likes
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {Array.from({ length: 6 }).map((_, index) => (
+              <TableRow key={index} className="border-b border-zinc-100 last:border-0">
+                <TableCell className="pl-6 py-4">
+                  <div className="flex items-center gap-4">
+                    <div className="h-20 w-36 rounded-md skeleton-shimmer" />
+                    <div className="min-w-0 flex flex-col gap-y-2">
+                      <div className="h-4 w-56 max-w-[28rem] rounded skeleton-shimmer" />
+                      <div className="h-3 w-72 max-w-[34rem] rounded skeleton-shimmer" />
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell className="py-4">
+                  <div className="h-3 w-20 rounded skeleton-shimmer" />
+                </TableCell>
+                <TableCell className="py-4">
+                  <div className="h-3 w-16 rounded skeleton-shimmer" />
+                </TableCell>
+                <TableCell className="py-4">
+                  <div className="h-3 w-24 rounded skeleton-shimmer" />
+                </TableCell>
+                <TableCell className="py-4 text-right">
+                  <div className="ml-auto h-3 w-10 rounded skeleton-shimmer" />
+                </TableCell>
+                <TableCell className="py-4 text-right">
+                  <div className="ml-auto h-3 w-10 rounded skeleton-shimmer" />
+                </TableCell>
+                <TableCell className="pr-6 py-4 text-right">
+                  <div className="ml-auto h-3 w-10 rounded skeleton-shimmer" />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
   );
 };
 

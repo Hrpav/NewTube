@@ -84,3 +84,26 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  @keyframes skeleton-shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* YouTube-ish loading shimmer */
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(24, 24, 27, 0.10) 25%,
+      rgba(24, 24, 27, 0.05) 37%,
+      rgba(24, 24, 27, 0.10) 63%
+    ) !important;
+    background-size: 400% 100% !important;
+    animation: skeleton-shimmer 1.35s ease-in-out infinite !important;
+  }
+}

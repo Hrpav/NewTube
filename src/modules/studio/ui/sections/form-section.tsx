@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/trpc/client";
-import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { videoUpdateSchema } from "@/db/schema";
+import { z } from "zod";
+import { toast } from "sonner";
 import { Suspense } from "react";
 import { MoreVerticalIcon, TrashIcon } from "lucide-react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -56,13 +57,26 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
 
+  const utils = trpc.useUtils();
+
+  const update = trpc.videos.update.useMutation({
+    onSuccess: () => {
+      utils.studio.getMany.invalidate();
+      utils.studio.getOne.invalidate({ id: videoId });
+      toast.success("Video updated");
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+    }
+  });
+
   const form = useForm<z.infer<typeof videoUpdateSchema>>({
     resolver: zodResolver(videoUpdateSchema),
     defaultValues: video,
   });
 
-  const onSubmit = async (data: z.infer<typeof videoUpdateSchema>) => {
-    console.log(data);
+  const onSubmit = (data: z.infer<typeof videoUpdateSchema>) => {
+    update.mutate(data);;
   };
 
   return (
@@ -76,7 +90,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
             </p>
           </div>
           <div className="flex items-center gap-x-2">
-            <Button type="submit" disabled={false}>
+            <Button type="submit" disabled={update.isPending}>
               Save
             </Button>
             <DropdownMenu>
@@ -162,6 +176,13 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 </FormItem>
               )}
             />
+          </div>
+          <div className="flex flex-col gap-y-8 lg:col-span-2">
+            <div classname="flex flex-col gap-4 bg-[#F9F9F9] rounded-xl overflow-hidden h-fit">
+              <div className="aspect-video overflow-hidden relative">
+                {/* TODO: Add the <VideoPlayer />*/}
+              </div>
+            </div>
           </div>
         </div>
       </form>

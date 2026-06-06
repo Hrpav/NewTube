@@ -6,6 +6,52 @@ A YouTube clone made with Next.js, Bun, React, tRPC, drizzle, tailwind, shadcn, 
 
 This project is **not finished yet** and is still under active development. Expect breaking changes.
 
+## Core Features
+
+### Main page (/)
+
+#### Sidebar
+
+[sidebar](docs/screenshots/sidebar.jpg)
+
+- Button to close and open
+- **"NewTube"** Logo
+- **Home** *(Not finished yet*)
+- **Subscriptions** *(Not finished yet*)
+- **Trending** *(Not finished yet*)
+- **History**
+- **Liked videos**
+- **All playlists**
+
+#### Video Categories
+
+[category](docs/screenshots/categories.jpg)
+
+- `ShadcnUI Carousel` implementation
+- Buttons to move to the `right` and `left`
+
+#### Search bar *(not implemented yet)*
+
+[searchbar](docs/screenshots/searchbar.jpg)
+
+- `Search` placeholder
+- Search button *(`lucide react`)*
+
+#### Your Profile *(using `clerk`)*
+
+[profile](docs/screenshots/profile.jpg)
+
+[`Clerk` documentation](https://clerk.com/docs)
+
+- `Clerk` implementation
+- "Manage account" button
+- Studio (goes to `/studio`)
+- Sign out
+
+### Studio (/studio)
+
+[studio](docs/screenshots/studio.jpg)
+
 ## Getting started
 
 ### Prerequisites

@@ -25,21 +25,21 @@ This project is **not finished yet** and is still under active development. Expe
 
 #### Video Categories
 
-[docs/screenshots/categories.jpg](https://github.com/Hrpav/NewTube/blob/main/docs/screenshots/categories.jpg)
+![docs/screenshots/categories.jpg](https://raw.githubusercontent.com/Hrpav/NewTube/main/docs/screenshots/categories.jpg)
 
 - `ShadcnUI Carousel` implementation
 - Buttons to move to the `right` and `left`
 
 #### Search bar *(not implemented yet)*
 
-[docs/screenshots/searchbar.jpg](https://github.com/Hrpav/NewTube/blob/main/docs/screenshots/searchbar.jpg)
+![docs/screenshots/sidebar.jpg](https://raw.githubusercontent.com/Hrpav/NewTube/main/docs/screenshots/sidebar.jpg)
 
 - `Search` placeholder
 - Search button *(`lucide react`)*
 
 #### Your Profile *(using `clerk`)*
 
-[docs/screenshots/profile.jpg](https://github.com/Hrpav/NewTube/blob/main/docs/screenshots/profile.jpg)
+![docs/screenshots/profile.jpg](https://raw.githubusercontent.com/Hrpav/NewTube/main/docs/screenshots/profile.jpg)
 
 [`Clerk` documentation](https://clerk.com/docs)
 
@@ -50,7 +50,7 @@ This project is **not finished yet** and is still under active development. Expe
 
 ### Studio (/studio)
 
-[docs/screenshots/studio.jpg](https://github.com/Hrpav/NewTube/blob/main/docs/screenshots/studio.jpg)
+![docs/screenshots/studio.jpg](https://raw.githubusercontent.com/Hrpav/NewTube/main/docs/screenshots/studio.jpg)
 
 ## Getting started
 

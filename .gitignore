@@ -43,6 +43,15 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# zed
+.zed/themes
+.zed/AGENTS.md
+
 # other
 demo.mp4
+*.codex
+.sessions/
+
+# ai ide/cli/temp files
+.cursor/
 *.codex

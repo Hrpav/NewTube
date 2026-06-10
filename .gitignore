@@ -48,7 +48,6 @@ next-env.d.ts
 .zed/AGENTS.md
 
 # other
-demo.mp4
 *.codex
 .sessions/
 

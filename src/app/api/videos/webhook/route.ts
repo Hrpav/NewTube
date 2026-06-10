@@ -8,6 +8,7 @@ import {
   VideoAssetDeletedWebhookEvent,
 } from "@mux/mux-node/resources/webhooks";
 import { mux } from "@/lib/mux";
+import { uploadRemoteFileAsServerFile } from "@/lib/uploadthing-server";
 import { videos } from "@/db/schema";
 import { db } from "@/db";
 
@@ -76,10 +77,29 @@ export const POST = async (request: Request) => {
         return new Response("Missing playbackId", { status: 400 });
       }
 
-      const thumbnailUrl = `https://image.mux.com/${playbackId}/thumbnail.jpg`;
-      const previewUrl = `https://image.mux.com/${playbackId}/animated.gif`;
-
+      const tempThumbnailUrl = `https://image.mux.com/${playbackId}/thumbnail.jpg`;
+      const tempPreviewUrl = `https://image.mux.com/${playbackId}/animated.gif`;
       const duration = data.duration ? Math.round(data.duration * 1000) : 0;
+
+      const [uploadedThumbnail, uploadedPreview] = await Promise.all([
+        uploadRemoteFileAsServerFile({
+          url: tempThumbnailUrl,
+          name: "thumbnail.jpg",
+        }),
+        uploadRemoteFileAsServerFile({
+          url: tempPreviewUrl,
+          name: "animated.gif",
+        }),
+      ]);
+
+      if (!uploadedThumbnail.data || !uploadedPreview.data) {
+        return new Response("Failed to upload thumbnail or preview", {
+          status: 500,
+        });
+      }
+
+      const { key: thumbnailKey, url: thumbnailUrl } = uploadedThumbnail.data;
+      const { key: previewKey, url: previewUrl } = uploadedPreview.data;
 
       await db
         .update(videos)
@@ -88,7 +108,9 @@ export const POST = async (request: Request) => {
           muxPlaybackId: playbackId,
           muxAssetId: data.id,
           thumbnailUrl,
+          thumbnailKey,
           previewUrl,
+          previewKey,
           duration,
         })
         .where(eq(videos.muxUploadId, data.upload_id));
@@ -118,16 +140,14 @@ export const POST = async (request: Request) => {
 
       console.log("Deleting video: ", { uploadId: data.upload_id });
 
-      await db
-        .delete(videos)
-        .where(eq(videos.muxUploadId, data.upload_id));
+      await db.delete(videos).where(eq(videos.muxUploadId, data.upload_id));
       break;
     }
     case "video.asset.track.ready": {
       const data = payload.data as VideoAssetTrackReadyWebhookEvent["data"] & {
         asset_id: string; // We have to put this for the assetId not to error
-                          // you can delete this but Typescript will error the assetId
-      }
+        // you can delete this but Typescript will error the assetId
+      };
 
       console.log("Track ready");
 

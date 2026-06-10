@@ -32,7 +32,6 @@ export const ThumbnailUploadModal = ({
         input={{ videoId }}
         onClientUploadComplete={onUploadComplete}
       />
-      <p>Hello!</p>
     </ResponsiveModal>
   );
 };
